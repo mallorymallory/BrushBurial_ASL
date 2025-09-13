@@ -67,6 +67,7 @@ update
             vars.IsLoading = true;
             vars.tempvar = true;
             vars.Setup = false;
+            vars.splitx = 0;
         }
     }
     
