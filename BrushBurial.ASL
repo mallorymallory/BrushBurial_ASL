@@ -19,11 +19,12 @@ init
     vars.IsLoading = false;
 
     int[] splits = new int[]{ 
-        3000,
-        5500,
-        1500,
-        3000,
-        0
+        //700  //PROLOGUE
+        3000,  //ACT I
+        5500,  //ACT II
+        1500,  //BOSS FIGHT
+        3000,  //ACT III
+        0      //END SCREEN
     };
 
     vars.splits = splits;
@@ -33,7 +34,7 @@ init
 
 update
 {
-    //print(current.trigger.ToString());
+    //print(current.trigger.ToString()); //DEBUG PRINT
     if(old.trigger != current.trigger){
         File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":trigger:" + current.trigger.ToString() + '\n');
         if(current.trigger >= 720 && current.trigger < 730){
