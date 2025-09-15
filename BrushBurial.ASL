@@ -6,6 +6,7 @@ state("Brush Burial")
 
 startup{    
     refreshRate = 30;
+    settings.Add("debug", false);
 }
 
 init
@@ -36,7 +37,9 @@ update
 {
     //print(current.trigger.ToString()); //DEBUG PRINT
     if(old.trigger != current.trigger){
-        File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":trigger:" + current.trigger.ToString() + '\n');
+        if(settings["debug"]){
+            File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":trigger:" + current.trigger.ToString() + '\n');
+        }
         if(current.trigger >= 720 && current.trigger < 730){
             vars.Setup = true;
             if(vars.IsLoading){
@@ -54,8 +57,9 @@ update
                 vars.Split = true;
                 vars.splitx++;
             }
-            
-            File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":trigger:" + current.trigger.ToString() + '\n');
+            if(settings["debug"]){
+                File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":trigger:" + current.trigger.ToString() + '\n');
+            }
         }
 
 
@@ -83,15 +87,18 @@ update
 
 split{return vars.Split;}
 onSplit{vars.Split = false;
-    File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+"SPLIT: split" + '\n');
+    if(settings["debug"]){
+        File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+"SPLIT: split" + '\n');
+    }
 }
 
 isLoading{return vars.IsLoading;}
 
 reset{return vars.Reset;}
 onReset{vars.Reset = false;
-    File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+"RESET: reset" + '\n');
-
+    if(settings["debug"]){
+        File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+":  :"+"RESET: reset" + '\n');
+    }
 }
 
 start{
