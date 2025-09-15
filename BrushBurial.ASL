@@ -40,7 +40,7 @@ update
         if(settings["debug"]){
             File.AppendAllText(vars.logs, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + ":trigger:" + current.trigger.ToString() + '\n');
         }
-        if(current.trigger >= 720 && current.trigger < 730){
+        if(current.trigger >= 700 && current.trigger < 800){
             vars.Setup = true;
             if(vars.IsLoading){
                 vars.IsLoading = false;
